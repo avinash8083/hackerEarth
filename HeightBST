@@ -1,0 +1,67 @@
+// https://www.hackerearth.com/practice/data-structures/trees/binary-search-tree/practice-problems/algorithm/monk-watching-fight/
+// https://www.geeksforgeeks.org/write-a-c-program-to-find-the-maximum-depth-or-height-of-a-tree/
+
+/* IMPORTANT: Multiple classes and nested static classes are supported */
+//imports for BufferedReader
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.util.*;
+
+class TestClass {
+    static Node root;
+    public static void main(String args[] ) throws Exception {
+        //Scanner
+        Scanner s = new Scanner(System.in);
+        int n = s.nextInt(); 
+        int a[]=new int[n];
+        for(int t=0;t<n;t++){
+         a[t] = s.nextInt();      
+        }
+        for(int t=0;t<n;t++){
+             insert(a[t],root);  
+        }
+ System.out.println(height(root));
+    }
+public static   Node insert(int key,Node root){
+       /* If the tree is empty, return a new node */
+        if (root == null) { 
+            root = new Node(key); 
+            return root; 
+        } 
+  
+        /* Otherwise, recur down the tree */
+        if (key < root.data) 
+            root.left = insert(key,root.left); 
+        else if (key > root.data) 
+            root.right = insert(key,root.right); 
+  
+        /* return the (unchanged) node pointer */
+        return root; 
+    }
+ public static  int height(Node node){
+            if(node==null)
+            return 0;
+            else{
+           /* compute the depth of each subtree */
+            int lDepth = height(node.left); 
+            int rDepth = height(node.right); 
+   
+            /* use the larger one */
+            if (lDepth > rDepth) 
+                return (lDepth + 1); 
+             else 
+                return (rDepth + 1);
+            }
+     }   
+}
+class Node{
+    
+    int data ;
+    Node left ;
+    Node right;
+    Node(int data){
+        this.data=data;
+    }
+}    
+    
+
