@@ -18,17 +18,17 @@ class TestClass {
          a[t] = s.nextInt();      
         }
         for(int t=0;t<n;t++){
-             insert(a[t],root);  
+             root=insert(a[t],root);                       //root=insert very imp here as final value must be stored in root node .
         }
- System.out.println(height(root));
+          System.out.println(height(root));
     }
-public static   Node insert(int key,Node root){
+      public static   Node insert(int key,Node root){
        /* If the tree is empty, return a new node */
         if (root == null) { 
             root = new Node(key); 
             return root; 
         } 
-  
+      else{
         /* Otherwise, recur down the tree */
         if (key < root.data) 
             root.left = insert(key,root.left); 
@@ -37,8 +37,9 @@ public static   Node insert(int key,Node root){
   
         /* return the (unchanged) node pointer */
         return root; 
+      }
     }
- public static  int height(Node node){
+      public static  int height(Node node){
             if(node==null)
             return 0;
             else{
@@ -63,5 +64,3 @@ class Node{
         this.data=data;
     }
 }    
-    
-
