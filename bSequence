@@ -15,29 +15,60 @@ class TestClass {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         int  loop = Integer.parseInt(br.readLine()); 
         String s[]=br.readLine().trim().split(" ");
-        int arr[]=new int[loop];
+        Integer arr[]=new Integer[loop];
+        int max=Integer.MIN_VALUE;
+        
+        
         for(int t=0;t<loop;t++){
-            arr[t]=Integer.parseInt(s[t]);
+        arr[t]=Integer.parseInt(s[t]);
         }
-       int n=Integer.parseInt(br.readLine()); 
+        
+      int n=Integer.parseInt(br.readLine()); 
+      
+      
        int brr[]=new int[n];
        for(int i=0;i<n;i++){
-            brr[i] = Integer.parseInt(br.readLine());   
+       brr[i] = Integer.parseInt(br.readLine());  
        }
        
+        TreeSet<Integer> ta = new TreeSet<Integer>(); 
+        TreeSet<Integer> tb = new TreeSet<Integer>(); 
+        
+        for(int i=0;i<loop;i++){
+        max=Math.max(max,arr[i]);
+          if(!ta.contains(arr[i])){
+              ta.add(arr[i]);
+          }
+          else if(arr[i]!=max){
+          tb.add(arr[i]);   
+          }
+        }
+          
+          
+         for(int i=0;i<n;i++){
+         max=Math.max(max,brr[i]);
+          if(!ta.contains(brr[i])){
+              ta.add(brr[i]);
+          }
+          else if(brr[i]!=max){
+          tb.add(brr[i]);   
+          }
+         System.out.println(ta.size()+tb.size());
+           }
+     
+     
        
-       
-       
-       
-       
-       
-       
-       
-       
-       
-        System.out.println(Arrays.toString(brr)); 
-
-
-
+    Iterator<Integer> iterator = ta.iterator();
+	while (iterator.hasNext()) {
+		System.out.print(iterator.next() + " ");
+	}
+	
+	Iterator<Integer> iterator2 = tb.descendingIterator();
+	while (iterator2.hasNext()) {
+		System.out.print(iterator2.next() + " ");
+	}
+	
+	
     }
 }
+
