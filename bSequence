@@ -55,9 +55,7 @@ class TestClass {
           }
          System.out.println(ta.size()+tb.size());
            }
-     
-     
-       
+        
     Iterator<Integer> iterator = ta.iterator();
 	while (iterator.hasNext()) {
 		System.out.print(iterator.next() + " ");
@@ -66,9 +64,6 @@ class TestClass {
 	Iterator<Integer> iterator2 = tb.descendingIterator();
 	while (iterator2.hasNext()) {
 		System.out.print(iterator2.next() + " ");
-	}
-	
-	
+	}	
     }
 }
-
