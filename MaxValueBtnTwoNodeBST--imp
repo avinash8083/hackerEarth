@@ -1,0 +1,80 @@
+//https://www.hackerearth.com/practice/data-structures/trees/binary-search-tree/practice-problems/algorithm/monk-and-cursed-tree/
+
+/*
+we can easily reach both nodes from LCA(lowest common ancestor) by just moving to left or right child recursively but to move from one node to other is difficult if they are in different subtrees without knowing their LCA. So LCA helps us here !
+Now find max in path from LCA to node A. Lets call it ans1
+Similarly find max in path from LCA to node B. Lets call it ans2
+Finally your answer must be max(ans1, ans2) .
+*/
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.util.*;
+
+class TestClass {
+    
+    static Node root;
+    
+    public static void main(String args[] ) throws Exception {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int loop = Integer.parseInt(br.readLine()); 
+        int arr[]=new int[loop];
+        String s[]=br.readLine().trim().split(" "); 
+        for(int t=0;t<loop;t++){
+            arr[t]=Integer.parseInt(s[t]);
+            root=insert(arr[t],root);
+        }
+        String u[]=br.readLine().trim().split(" ");
+        int x=Integer.parseInt(u[0]);
+        int y=Integer.parseInt(u[1]);
+        
+        Node lca=lca(root,x,y);
+        System.out.println(Math.max(maxInPath(lca,x),maxInPath(lca,y)));   
+        
+    }
+    
+  public static  int maxInPath(Node  root, int x){            // this function find max in path from root node to node x
+    // for this problem we pass root node = lca(a, b) and x can be either a or b
+    if(root.data == x){       
+        return x;
+    }
+    if(root.data > x){
+        return Math.max(maxInPath(root.left, x), root.data);
+    }else{
+        return Math.max(maxInPath(root.right, x), root.data);
+    }
+}
+
+
+  public static Node insert(int key,Node root){
+      if(root==null){
+          root=new Node(key);
+          return root;
+      }
+      else if(key<root.data){
+          root.left=insert(key,root.left);
+      }
+     else{
+       root.right=insert(key,root.right);
+      } 
+   return root;    
+  }  
+  
+ public static Node lca(Node  root, int v1,int v2){
+    if(root.data > v1 && root.data > v2){ // check if both keys are to the left of curr. node
+        return lca(root.left, v1, v2);
+    }
+    if(root.data < v1 && root.data < v2){ // check if both keys are to the right of curr. node
+        return lca(root.right, v1, v2);
+    }
+    return root;                            // return the LCA
+}
+
+}
+class Node{
+    int data ;
+    Node left ;
+    Node right;
+    Node(int data){
+        this.data=data;
+    } 
+}
