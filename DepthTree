@@ -1,0 +1,66 @@
+
+//https://www.hackerearth.com/practice/data-structures/trees/binary-search-tree/practice-problems/algorithm/dummy3-4/description/#c211850
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.util.*;
+
+class TestClass {
+    public static void main(String args[] ) throws Exception {
+       
+        Scanner sc = new Scanner(System.in);
+        int loop = sc.nextInt(); 
+        for(int i=0;i<loop;i++){
+         Node root=null;
+        int n = sc.nextInt(); 
+        int a[]=new int[n];
+        for(int t=0;t<n;t++){
+         a[t] = sc.nextInt();      
+        }
+        for(int t=0;t<n;t++){
+             root=insert(a[t],root); 
+        }
+          System.out.println(count(root));
+        }
+    }
+      public static   Node insert(int key,Node root){
+       /* If the tree is empty, return a new node */
+        if (root == null) { 
+            root = new Node(key); 
+            return root; 
+        } 
+      else{
+        /* Otherwise, recur down the tree */
+        if (key < root.data) 
+            root.left = insert(key,root.left); 
+        else if (key > root.data) 
+            root.right = insert(key,root.right); 
+  
+        /* return the (unchanged) node pointer */
+        return root; 
+      }
+    }
+    public static int  count(Node root){
+        if(root==null)
+        return 0;
+       return Math.max(count(root.left),count(root.right))+1;
+    }
+}
+class Node{
+    
+    int data ;
+    Node left ;
+    Node right;
+    Node(int data){
+        this.data=data;
+    }
+}
+//....................................................................................................................
+other way 
+    public static int  count(Node root){
+        if(root==null)
+        return 0;
+        int left=count(root.left);
+        int right=count(root.right);
+       return Math.max(left,right)+1;
+    }
